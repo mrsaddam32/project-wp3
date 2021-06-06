@@ -17,13 +17,13 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="<?= base_url('pasien'); ?>">Antaris Hospital</a>
+            <a class="navbar-brand" href="<?= base_url('pasien/myProfile'); ?>">Antaris Hospital</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse text-uppercase" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link text-white" aria-current="page" href="<?= base_url('pasien'); ?>"><i class="bi bi-house-door-fill"></i> Home</a>
+                    <a class="nav-link text-white" aria-current="page" href="<?= base_url('pasien/myProfile'); ?>"><i class="bi bi-house-door-fill"></i> Home</a>
                     <a class="nav-link text-white" href="<?= base_url('pasien/rekam_medis') ?>">Rekam Medis</a>
                 </div>
                 <a class="btn btn-sm btn-primary ms-auto" href="<?= base_url('pasien/logout'); ?>">Logout</a>
@@ -37,8 +37,9 @@
                     <div class="card-body fw-bold">
                         <h3 class="card-title"><?= $nama_pasien; ?></h3>
                         <h5 class="card-title"><?= $nama_dokter; ?></h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Nomor Pendaftaran : <?= $no_pendaftaran; ?></h6>
+                        <h6 class="card-subtitle mb-2 text-muted">Nomor Pendaftaran : <?= $this->session->userdata('no_pendaftaran'); ?></h6>
                         <h6 class="card-subtitle mb-2 text-muted">Nomor Rekamedis : <?= $no_rmdk; ?></h6>
+                        <p class="card-text">Keluhan : <?= $keluhan; ?></p>
                         <p class="card-text">Diagnosa : <?= $diagnosa; ?></p>
                         <p class="card-text">Tanggal Rekamedis : <?= $tgl_rmdk; ?></p>
                         <p class="card-text">Obat yang diberikan : <?= $nama_obat; ?></p>

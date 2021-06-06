@@ -5,43 +5,61 @@ class Pasien extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(['PasienModel', 'RekmedisModel']);
+        $this->load->model(['PasienModel', 'RekmedisModel', 'ObatModel']);
         // cek_login_pasien();
     }
 
     public function index()
     {
-        $data['title'] = 'Dashboard Pasien';
-        $pasien = $this->PasienModel->getPasien()->result();
+        $this->proses_login();
+    }
+
+    public function myProfile()
+    {
+        $pasien = $this->PasienModel->cekData(['no_pendaftaran' => $this->session->userdata('no_pendaftaran')])->row_array();
         // var_dump($pasien);
         // die;
         foreach ($pasien as $pas) {
-            $data['no_pendaftaran'] = $pas->no_pendaftaran;
-            $data['nama_pasien'] = $pas->nama_pasien;
-            $data['umur'] = $pas->umur;
-            $data['tgl_lahir'] = $pas->tgl_lahir;
-            $data['jenis_kelamin'] = $pas->jenis_kelamin;
-            $data['tgl_daftar'] = $pas->tgl_daftar;
+            $data = [
+                'title' => 'Profile Pasien',
+                'nama_pasien' => $pasien['nama_pasien'],
+                'tgl_lahir' => $pasien['tgl_lahir'],
+                'keluhan' => $pasien['keluhan'],
+                'umur' => $pasien['umur'],
+                'jenis_kelamin' => $pasien['jenis_kelamin'],
+                'tgl_daftar' => $pasien['tgl_daftar']
+            ];
         }
 
-        $this->load->view('pasien/index', $data);
+        $this->load->view('pasien/my_profile', $data);
     }
 
     public function rekam_medis()
     {
-        $data['title'] = 'Hasil Rekam Medis';
-        $rekMedis = $this->RekmedisModel->getAllData()->result();
+        $pasien = $this->PasienModel->cekData(['no_pendaftaran' => $this->session->userdata('no_pendaftaran')])->row_array();
+        $rekMedis = $this->RekmedisModel->cekData(['no_pendaftaran' => $this->session->userdata('no_pendaftaran')])->row_array();
         // var_dump($rekMedis);
         // die;
-        foreach ($rekMedis as $row) {
-            $data['no_rmdk'] = $row->no_rmdk;
-            $data['no_pendaftaran'] = $row->no_pendaftaran;
-            $data['nama_pasien'] = $row->nama_pasien;
-            $data['nama_dokter'] = $row->nama_dokter;
-            $data['tgl_rmdk'] = $row->tgl_rmdk;
-            $data['keluhan'] = $row->keluhan;
-            $data['diagnosa'] = $row->diagnosa;
-            $data['nama_obat'] = $row->nama_obat;
+        foreach ($pasien as $pas) {
+            $data = [
+                'title' => 'Hasil Rekam Medis',
+                'nama_pasien' => $pasien['nama_pasien'],
+                'jenis_kelamin' => $pasien['jenis_kelamin'],
+                'tgl_daftar' => $pasien['tgl_daftar']
+            ];
+        }
+
+        foreach ($rekMedis as $rm) {
+            $data = [
+                'title' => 'Hasil Rekam Medis',
+                'nama_pasien' => $rekMedis['nama_pasien'],
+                'nama_dokter' => $rekMedis['nama_dokter'],
+                'no_rmdk' => $rekMedis['no_rmdk'],
+                'tgl_rmdk' => $rekMedis['tgl_rmdk'],
+                'keluhan' => $rekMedis['keluhan'],
+                'diagnosa' => $rekMedis['diagnosa'],
+                'nama_obat' => $rekMedis['nama_obat']
+            ];
         }
 
         $this->load->view('pasien/rekam_medis', $data);
@@ -111,13 +129,15 @@ class Pasien extends CI_Controller
             // Cek tanggal lahirnya sebagai password
             if ($password == $pasien['tgl_lahir']) {
                 $data = [
+                    'no_pendaftaran' => $pasien['no_pendaftaran'],
                     'nama_pasien' => $pasien['nama_pasien'],
                     'umur' => $pasien['umur'],
                     'jenis_kelamin' => $pasien['jenis_kelamin']
                 ];
                 // var_dump($data);
                 // die;
-                redirect('pasien', $data);
+                $this->session->set_userdata($data);
+                redirect('pasien/myProfile');
             } else {
                 $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">No Pendaftaran / Tanggal Lahir salah</div>');
                 redirect('pasien/login');

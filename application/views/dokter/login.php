@@ -48,6 +48,7 @@
             <h1 class="h3 mb-3 fw-normal">Silahkan Login</h1>
             <span style="font-size: 15px;">Untuk password menggunakan tanggal lahir.</span>
             <div class="container">
+                <?= $this->session->flashdata('pesan'); ?>
                 <?= validation_errors(); ?>
             </div>
             <div class="form-floating">

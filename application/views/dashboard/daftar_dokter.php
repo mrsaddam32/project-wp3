@@ -25,7 +25,7 @@
                         <td><?= $row->spesialis; ?></td>
                         <td>
                             <a href="#" class="btn btn-sm btn-warning">Edit Dokter</a>
-                            <a href="#" class="btn btn-sm btn-danger">Hapus Dokter</a>
+                            <a href="<?= base_url('dokter/hapus_dokter/' . $row->id_dokter); ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data dokter ini ?')">Hapus Dokter</a>
                         </td>
                     </tr>
                 </tbody>

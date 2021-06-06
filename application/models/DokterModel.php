@@ -21,4 +21,10 @@ class DokterModel extends CI_Model
     {
         return $this->db->get_where('dokter', $where);
     }
+
+    public function hapusDokter($where)
+    {
+        $this->db->where($where);
+        $this->db->delete('dokter');
+    }
 }

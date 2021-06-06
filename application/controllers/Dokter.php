@@ -5,24 +5,31 @@ class Dokter extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(['DokterModel', 'PasienModel', 'ObatModel']);
+        $this->load->model(['DokterModel', 'PasienModel', 'ObatModel', 'RekmedisModel']);
     }
 
     public function index()
     {
-        $data['title'] = 'Dashboard Dokter';
-        $dokter = $this->DokterModel->getDokter()->result();
+        $this->proses_login();
+    }
+
+    public function myProfile()
+    {
+        $dokter = $this->DokterModel->cekData(['kode_dokter' => $this->session->userdata('kode_dokter')])->row_array();
         // var_dump($dokter);
         // die;
+
         foreach ($dokter as $dok) {
-            $data['kode_dokter'] = $dok->kode_dokter;
-            $data['nama_dokter'] = $dok->nama_dokter;
-            $data['tgl_lahir'] = $dok->tgl_lahir;
-            $data['jenis_kelamin'] = $dok->jenis_kelamin;
-            $data['spesialis'] = $dok->spesialis;
+            $data = [
+                'title' => 'Profil Dokter',
+                'nama_dokter' => $dokter['nama_dokter'],
+                'tgl_lahir' => $dokter['tgl_lahir'],
+                'jenis_kelamin' => $dokter['jenis_kelamin'],
+                'spesialis' => $dokter['spesialis']
+            ];
         }
 
-        $this->load->view('dokter/index', $data);
+        $this->load->view('dokter/my_profile', $data);
     }
 
     public function periksa_pasien()
@@ -144,13 +151,15 @@ class Dokter extends CI_Controller
             // Cek tanggal lahirnya sebagai password
             if ($password == $dokter['tgl_lahir']) {
                 $data = [
+                    'kode_dokter' => $dokter['kode_dokter'],
                     'nama_dokter' => $dokter['nama_dokter'],
                     'spesialis' => $dokter['spesialis'],
                     'jenis_kelamin' => $dokter['jenis_kelamin']
                 ];
                 // var_dump($data);
                 // die;
-                redirect('dokter', $data);
+                $this->session->set_userdata($data);
+                redirect('dokter/myProfile');
             } else {
                 $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">Kode Dokter / Tanggal Lahir salah</div>');
                 redirect('dokter/login');
@@ -159,6 +168,13 @@ class Dokter extends CI_Controller
             $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">Kode Dokter salah</div>');
             redirect('dokter/login');
         }
+    }
+
+    public function hapus_dokter($id)
+    {
+        $where = ['id_dokter' => $id];
+        $this->DokterModel->hapusDokter($where);
+        redirect('dashboard/daftar_dokter');
     }
 
     public function logout()

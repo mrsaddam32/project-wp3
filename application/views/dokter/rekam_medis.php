@@ -41,11 +41,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Nama Dokter</label>
-                    <select class="form-control" name="nama_dokter" id="nama_dokter">
-                        <?php foreach ($dokter as $row) { ?>
-                            <option value="<?= $row->nama_dokter ?>"><?= $row->nama_dokter ?></option>
-                        <?php } ?>
-                    </select>
+                    <input type="text" class="form-control" value="<?= $this->session->userdata('nama_dokter') ?>" name="nama_dokter" readonly id="exampleFormControlInput1" placeholder="Masukkan Nama..">
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Nama Pasien</label>
