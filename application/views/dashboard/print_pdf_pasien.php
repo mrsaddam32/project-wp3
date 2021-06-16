@@ -1,7 +1,6 @@
 <div class="container mt-5">
-    <a href="<?= base_url('dashboard/cetak_pdf_pasien'); ?>" class="btn btn-danger"><i class="bi bi-file-earmark-pdf"></i> Cetak PDF</a>
     <div class="table-responsive">
-        <table class="table">
+        <table class="table" border="1" width="100%">
             <thead>
                 <tr>
                     <th scope="col">No.</th>
@@ -11,7 +10,6 @@
                     <th scope="col">Tanggal Lahir</th>
                     <th scope="col">Jenis kelamin</th>
                     <th scope="col">Tanggal Daftar</th>
-                    <th scope="col">Aksi</th>
                 </tr>
             </thead>
             <?php $i = 1; ?>
@@ -25,10 +23,6 @@
                         <td><?= $row->tgl_lahir; ?></td>
                         <td><?= $row->jenis_kelamin; ?></td>
                         <td><?= $row->tgl_daftar; ?></td>
-                        <td>
-                            <a href="<?= base_url('pasien/edit_data/' . $row->id_pasien); ?>" class="btn btn-sm btn-warning">Edit Pasien</a>
-                            <a href="<?= base_url('pasien/hapus_data/' . $row->id_pasien); ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini ?')" class="btn btn-sm btn-danger">Hapus Pasien</a>
-                        </td>
                     </tr>
                 </tbody>
             <?php } ?>

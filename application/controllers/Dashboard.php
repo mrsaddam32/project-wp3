@@ -6,6 +6,7 @@ class Dashboard extends CI_Controller
     {
         parent::__construct();
         $this->load->model(['UserModel', 'PasienModel', 'DokterModel', 'ObatModel', 'RekmedisModel']);
+        $this->load->library('pdf');
     }
 
     public function index()
@@ -90,5 +91,43 @@ class Dashboard extends CI_Controller
             $this->load->view('dashboard/daftar_obat', $data);
             $this->load->view('layouts/footer');
         }
+    }
+
+    public function cetak_pdf_pasien()
+    {
+        $data = [
+            'user' => $this->UserModel->cekData(['username' => $this->session->userdata('username')])->row_array(),
+            'pasien' => $this->PasienModel->getPasien()->result(),
+            'title' => 'Laporan Data Pasien'
+        ];
+        $this->load->view('dashboard/print_pdf_pasien', $data);
+        // Config pdf
+        $paper_size = 'A4'; // Ukuran Kertas
+        $orientation = 'landscape'; // Format kertas
+        $html = $this->output->get_output();
+        $this->pdf->set_paper($paper_size, $orientation);
+        // Converting to PDF
+        $this->pdf->load_html($html);
+        $this->pdf->render();
+        $this->pdf->stream("Laporan_data_pasien.pdf", ['Attachment' => 0]);
+    }
+
+    public function cetak_pdf_dokter()
+    {
+        $data = [
+            'user' => $this->UserModel->cekData(['username' => $this->session->userdata('username')])->row_array(),
+            'dokter' => $this->DokterModel->getDokter()->result(),
+            'title' => 'Laporan Data Dokter'
+        ];
+        $this->load->view('dashboard/print_pdf_dokter', $data);
+        // Config pdf
+        $paper_size = 'A4'; // Ukuran Kertas
+        $orientation = 'landscape'; // Format kertas
+        $html = $this->output->get_output();
+        $this->pdf->set_paper($paper_size, $orientation);
+        // Converting to PDF
+        $this->pdf->load_html($html);
+        $this->pdf->render();
+        $this->pdf->stream("Laporan_data_dokter.pdf", ['Attachment' => 0]);
     }
 }
