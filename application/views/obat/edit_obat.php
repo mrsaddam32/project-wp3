@@ -1,8 +1,8 @@
 <div class="container mt-5">
     <div class="row">
         <?= validation_errors(); ?>
-        <form action="<?= base_url('obat/proses_edit') ?>" method="POST" class="form-group">
-            <input type="hidden" name="id_obat" id="id_obat">
+        <form action="" method="POST" class="form-group">
+            <input type="hidden" name="id_obat" id="id_obat" value="<?= $obat['id_obat'] ?>">
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Nama Obat</label>
                 <input type="text" class="form-control" value="<?= $obat['nama_obat'] ?>" readonly name="nama_obat" id="exampleFormControlInput1" placeholder="Masukkan Nama..">

@@ -25,8 +25,8 @@
                         <td><?= $row->jenis_kelamin; ?></td>
                         <td><?= $row->tgl_daftar; ?></td>
                         <td>
-                            <a href="#" class="btn btn-sm btn-warning">Edit Pasien</a>
-                            <a href="#" class="btn btn-sm btn-danger">Hapus Pasien</a>
+                            <a href="<?= base_url('pasien/edit_data/' . $row->id_pasien); ?>" class="btn btn-sm btn-warning">Edit Pasien</a>
+                            <a href="<?= base_url('pasien/hapus_data/' . $row->id_pasien); ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini ?')" class="btn btn-sm btn-danger">Hapus Pasien</a>
                         </td>
                     </tr>
                 </tbody>

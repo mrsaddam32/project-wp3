@@ -12,6 +12,19 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
     <title>Antaris Hospital | <?= $title; ?></title>
+    <style>
+        body {
+            background-color: #ddd;
+        }
+
+        .card {
+            border: none;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.15), 0 10px 10px rgba(0, 0, 0, 0.10);
+            padding: 20px;
+        }
+    </style>
 </head>
 
 <body>
@@ -36,7 +49,7 @@
                 <div class="card">
                     <div class="card-body fw-bold">
                         <h3 class="card-title"><?= $nama_pasien; ?></h3>
-                        <h5 class="card-title"><?= $nama_dokter; ?></h5>
+                        <h5 class="card-title">Nama Dokter : <?= $nama_dokter; ?></h5>
                         <h6 class="card-subtitle mb-2 text-muted">Nomor Pendaftaran : <?= $this->session->userdata('no_pendaftaran'); ?></h6>
                         <h6 class="card-subtitle mb-2 text-muted">Nomor Rekamedis : <?= $no_rmdk; ?></h6>
                         <p class="card-text">Keluhan : <?= $keluhan; ?></p>

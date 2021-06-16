@@ -48,7 +48,7 @@
                             <a class="nav-link text-white" aria-current="page" href="<?= base_url(); ?>"><i class="bi bi-house-door-fill"></i> Home</a>
                         </li>
                     </ul>
-                    <a class="float-end" href="<?= base_url('pasien/register'); ?>">Register ?</a>
+                    <a class="float-end" href="<?= base_url('pasien/register'); ?>">Register/Login ?</a>
                     <a class="btn btn-sm btn-primary ms-auto" href="<?= base_url('auth/login'); ?>">Login</a>
                 </div>
             <?php } ?>

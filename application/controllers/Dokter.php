@@ -46,15 +46,15 @@ class Dokter extends CI_Controller
 
     public function rekam_medis($id_pasien)
     {
-        $where = [
-            'id_pasien' => $id_pasien
-        ];
+        $where = ['id_pasien' => $id_pasien];
         $data = [
             'title' => 'Rekam Medis Pasien',
-            'pasien' => $this->PasienModel->editPasien($where)->row_array(),
+            'pasien' => $this->PasienModel->edit_data($where)->row_array(),
             'dokter' => $this->DokterModel->getDokter()->result(),
             'obat' => $this->ObatModel->getObat()->result()
         ];
+        // var_dump($data['pasien']);
+        // die;
 
         $this->load->view('dokter/rekam_medis', $data);
     }
@@ -84,6 +84,7 @@ class Dokter extends CI_Controller
         // var_dump($data);
         // die;
         $this->PasienModel->insert_rekmedis($data);
+        $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">Anda berhasil melakukan pemeriksaan pasien.</div>');
         redirect('dokter/periksa_pasien');
     }
 
@@ -130,6 +131,23 @@ class Dokter extends CI_Controller
             $this->DokterModel->tambahDokter($data);
             $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">Selamat anda telah berhasil menambah data dengan kode dokter ' . $data['kode_dokter'] . '. </div>');
             redirect('dokter/login');
+        }
+    }
+
+    public function edit_dokter($id)
+    {
+        $data['title'] = 'Edit Data Dokter';
+        $data['dokter'] = $this->DokterModel->getDokterById($id);
+        $data['spesialis'] = ['UMUM', 'THT', 'KULIT & KELAMIN'];
+        $data['jenis_kelamin'] = ['Laki-Laki', 'Perempuan'];
+        $this->form_validation->set_rules('nama_dokter', 'Nama Dokter', 'required');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('layouts/header', $data);
+            $this->load->view('dokter/edit_dokter', $data);
+            $this->load->view('layouts/footer');
+        } else {
+            $this->DokterModel->updateData();
+            redirect('dashboard/daftar_dokter');
         }
     }
 

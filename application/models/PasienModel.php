@@ -12,9 +12,30 @@ class PasienModel extends CI_Model
         $this->db->insert('pasien', $data);
     }
 
-    public function editPasien($where)
+    public function editPasien()
+    {
+        // var_dump($this->input->post('id_pasien'));
+        // die;
+        $data = [
+            'nama_pasien' => $this->input->post('nama_pasien', true),
+            'tgl_lahir' => $this->input->post('tgl_lahir', true),
+            'keluhan' => $this->input->post('keluhan', true),
+            'umur' => $this->input->post('umur', true),
+            'jenis_kelamin' => $this->input->post('jenis_kelamin', true)
+        ];
+        $this->db->where('id_pasien', $this->input->post('id_pasien'));
+        $this->db->update('pasien', $data);
+    }
+
+    public function edit_data($where)
     {
         return $this->db->get_where('pasien', $where);
+    }
+
+    public function hapusData($id_pasien)
+    {
+        $this->db->where('id_pasien', $id_pasien);
+        $this->db->delete('pasien');
     }
 
     public function cekData($where = null)
@@ -22,9 +43,9 @@ class PasienModel extends CI_Model
         return $this->db->get_where('pasien', $where);
     }
 
-    public function getPasienWhere($where = null)
+    public function getPasienById($id_pasien)
     {
-        return $this->db->get_where('pasien', $where);
+        return $this->db->get_where('pasien', ['id_pasien' => $id_pasien])->row_array();
     }
 
     public function insert_rekmedis($data = null)

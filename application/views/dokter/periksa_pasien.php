@@ -32,6 +32,7 @@
     </nav>
     <div class="container mt-5">
         <div class="table-responsive">
+            <?php $this->session->flashdata('pesan'); ?>
             <table class="table">
                 <thead>
                     <tr>

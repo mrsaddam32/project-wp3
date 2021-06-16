@@ -22,6 +22,7 @@ class Pasien extends CI_Controller
         foreach ($pasien as $pas) {
             $data = [
                 'title' => 'Profile Pasien',
+                'rek_medis' => $this->RekmedisModel->cekData(['no_pendaftaran' => $this->session->userdata('no_pendaftaran')])->row_array(),
                 'nama_pasien' => $pasien['nama_pasien'],
                 'tgl_lahir' => $pasien['tgl_lahir'],
                 'keluhan' => $pasien['keluhan'],
@@ -45,6 +46,7 @@ class Pasien extends CI_Controller
                 'title' => 'Hasil Rekam Medis',
                 'nama_pasien' => $pasien['nama_pasien'],
                 'jenis_kelamin' => $pasien['jenis_kelamin'],
+                'keluhan' => $pasien['keluhan'],
                 'tgl_daftar' => $pasien['tgl_daftar']
             ];
         }
@@ -146,6 +148,30 @@ class Pasien extends CI_Controller
             $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">No Pendaftaran salah</div>');
             redirect('pasien/login');
         }
+    }
+
+    public function edit_data($id_pasien)
+    {
+        $data['title'] = 'Edit Data Pasien';
+        $data['pasien'] = $this->PasienModel->getPasienById($id_pasien);
+        $data['jenis_kelamin'] = ['Laki-Laki', 'Perempuan'];
+
+        $this->form_validation->set_rules('nama_pasien', 'Nama Pasien', 'required');
+        $this->form_validation->set_rules('jenis_kelamin', 'Jenis Kelamin', 'required');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('layouts/header', $data);
+            $this->load->view('pasien/edit_pasien', $data);
+            $this->load->view('layouts/footer');
+        } else {
+            $this->PasienModel->editPasien();
+            redirect('dashboard/daftar_pasien');
+        }
+    }
+
+    public function hapus_data($id_pasien)
+    {
+        $this->PasienModel->hapusData($id_pasien);
+        redirect('dashboard/daftar_pasien');
     }
 
     public function logout()

@@ -12,6 +12,19 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
     <title>Antaris Hospital | <?= $title; ?></title>
+    <style>
+        body {
+            background-color: #ddd;
+        }
+
+        .card {
+            border: none;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.15), 0 10px 10px rgba(0, 0, 0, 0.10);
+            padding: 20px;
+        }
+    </style>
 </head>
 
 <body>
@@ -24,7 +37,11 @@
             <div class="collapse navbar-collapse text-uppercase" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-link text-white" aria-current="page" href="<?= base_url('pasien/myProfile'); ?>"><i class="bi bi-house-door-fill"></i> Home</a>
-                    <a class="nav-link text-white" href="<?= base_url('pasien/rekam_medis') ?>">Rekam Medis</a>
+                    <?php if (!empty($rek_medis)) { ?>
+                        <a class="nav-link text-white" href="<?= base_url('pasien/rekam_medis') ?>">Rekam Medis</a>
+                    <?php } else { ?>
+                        <a class="nav-link text-white"></a>
+                    <?php } ?>
                 </div>
                 <a class="btn btn-sm btn-primary ms-auto" href="<?= base_url('pasien/logout'); ?>">Logout</a>
             </div>
@@ -41,6 +58,11 @@
                         <p class="card-text">Tanggal Lahir : <?= $tgl_lahir; ?></p>
                         <p class="card-text">Jenis Kelamin : <?= $jenis_kelamin; ?></p>
                         <p class="card-text">Tanggal Pendaftaran : <?= $tgl_daftar; ?></p>
+                        <?php if (!empty($rek_medis)) { ?>
+                            <span class="badge bg-success">Sudah Diperiksa</span>
+                        <?php } else { ?>
+                            <span class="badge bg-info">Belum Diperiksa</span>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

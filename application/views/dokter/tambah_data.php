@@ -28,6 +28,7 @@
                 </select>
             </div>
             <button class="btn btn-primary" type="submit">Tambah data</button>
+            <a href="<?= base_url('dashboard/daftar_dokter'); ?>" class="btn btn-info text-white">Kembali</a>
         </form>
     </div>
 </div>

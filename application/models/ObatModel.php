@@ -7,8 +7,13 @@ class ObatModel extends CI_Model
         return $this->db->get('obat');
     }
 
-    public function tambahObat($data = null)
+    public function tambahObat()
     {
+        $data = [
+            'nama_obat' => $this->input->post('nama_obat', true),
+            'satuan' => $this->input->post('satuan', true),
+            'stok' => $this->input->post('stok', true)
+        ];
         $this->db->insert('obat', $data);
     }
 

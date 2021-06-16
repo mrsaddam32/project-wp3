@@ -5,7 +5,7 @@ class Dashboard extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(['UserModel', 'PasienModel', 'DokterModel', 'ObatModel']);
+        $this->load->model(['UserModel', 'PasienModel', 'DokterModel', 'ObatModel', 'RekmedisModel']);
     }
 
     public function index()
@@ -39,7 +39,8 @@ class Dashboard extends CI_Controller
                 'nama' => $user['nama'],
                 'role' => $user['role'],
                 'title' => 'Dashboard Admin',
-                'pasien' => $this->PasienModel->getPasien()->result()
+                'pasien' => $this->PasienModel->getPasien()->result(),
+                'rek_medis' => $this->RekmedisModel->cekData(['no_pendaftaran' => $this->session->userdata('no_pendaftaran')])->row_array()
             ];
 
             // var_dump($data['pasien']);
