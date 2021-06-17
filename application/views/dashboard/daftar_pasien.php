@@ -1,4 +1,5 @@
 <div class="container mt-5">
+    <?= $this->session->flashdata('pesan'); ?>
     <a href="<?= base_url('dashboard/cetak_pdf_pasien'); ?>" class="btn btn-danger"><i class="bi bi-file-earmark-pdf"></i> Cetak PDF</a>
     <div class="table-responsive">
         <table class="table">

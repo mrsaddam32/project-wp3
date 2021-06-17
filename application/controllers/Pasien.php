@@ -168,6 +168,10 @@ class Pasien extends CI_Controller
             $this->load->view('layouts/footer');
         } else {
             $this->PasienModel->editPasien();
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            Berhasil mengubah data pasien.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>');
             redirect('dashboard/daftar_pasien');
         }
     }
