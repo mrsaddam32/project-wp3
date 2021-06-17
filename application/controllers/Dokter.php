@@ -84,7 +84,10 @@ class Dokter extends CI_Controller
         // var_dump($data);
         // die;
         $this->PasienModel->insert_rekmedis($data);
-        $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">Anda berhasil melakukan pemeriksaan pasien.</div>');
+        $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Selamat !</strong> Anda berhasil melakukan pemeriksaan pasien.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>');
         redirect('dokter/periksa_pasien');
     }
 
@@ -147,6 +150,10 @@ class Dokter extends CI_Controller
             $this->load->view('layouts/footer');
         } else {
             $this->DokterModel->updateData();
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                Anda berhasil mengubah data dokter.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>');
             redirect('dashboard/daftar_dokter');
         }
     }
@@ -177,6 +184,10 @@ class Dokter extends CI_Controller
                 // var_dump($data);
                 // die;
                 $this->session->set_userdata($data);
+                $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                Selamat Datang Dokter <strong>' . $data['nama_dokter'] . '</strong>.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>');
                 redirect('dokter/myProfile');
             } else {
                 $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">Kode Dokter / Tanggal Lahir salah</div>');
@@ -201,7 +212,10 @@ class Dokter extends CI_Controller
         $this->session->unset_userdata('tgl_lahir');
         $this->session->unset_userdata('jenis_kelamin');
         $this->session->unset_userdata('spesialis');
-        $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-message" role="alert">Anda telah logout</div>');
+        $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+        Anda berhasil logout.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>');
 
         redirect(base_url());
     }

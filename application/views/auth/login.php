@@ -43,6 +43,7 @@
 
 <body class="text-center">
     <main class="form-signin">
+        <?= $this->session->flashdata('pesan'); ?>
         <form method="POST" action="<?= base_url('auth/proses_login'); ?>">
             <img class="mb-4" src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
             <h1 class="h3 mb-3 fw-normal">Silahkan Login</h1>

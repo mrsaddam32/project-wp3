@@ -37,29 +37,47 @@
             <?= validation_errors(); ?>
             <form action="<?= base_url('dokter/proses_rekam') ?>" method="POST" class="form-group">
                 <input type="hidden" value="<?= $pasien['id_pasien'] ?>" name="id_pasien">
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Nomor Pendaftaran</label>
-                    <input type="number" class="form-control" value="<?= $pasien['no_pendaftaran'] ?>" name="no_pendaftaran" readonly id="exampleFormControlInput1" placeholder="Masukkan Nama..">
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Nomor Pendaftaran</label>
+                            <input type="number" class="form-control" value="<?= $pasien['no_pendaftaran'] ?>" name="no_pendaftaran" readonly id="exampleFormControlInput1" placeholder="Masukkan Nama..">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Nama Dokter</label>
+                            <input type="text" class="form-control" value="<?= $this->session->userdata('nama_dokter') ?>" name="nama_dokter" readonly id="exampleFormControlInput1" placeholder="Masukkan Nama..">
+                        </div>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Nama Dokter</label>
-                    <input type="text" class="form-control" value="<?= $this->session->userdata('nama_dokter') ?>" name="nama_dokter" readonly id="exampleFormControlInput1" placeholder="Masukkan Nama..">
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Nama Pasien</label>
+                            <input type="text" class="form-control" name="nama_pasien" value="<?= $pasien['nama_pasien'] ?>" readonly id="exampleFormControlInput1" placeholder="Masukkan Nama..">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Tanggal Lahir</label>
+                            <input type="date" class="form-control" name="tgl_lahir" value="<?= $pasien['tgl_lahir'] ?>" readonly id="exampleFormControlInput1" placeholder="name@example.com">
+                        </div>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Nama Pasien</label>
-                    <input type="text" class="form-control" name="nama_pasien" value="<?= $pasien['nama_pasien'] ?>" readonly id="exampleFormControlInput1" placeholder="Masukkan Nama..">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Tanggal Lahir</label>
-                    <input type="date" class="form-control" name="tgl_lahir" value="<?= $pasien['tgl_lahir'] ?>" readonly id="exampleFormControlInput1" placeholder="name@example.com">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Jenis Kelamin</label>
-                    <input type="text" class="form-control" name="jenis_kelamin" value="<?= $pasien['jenis_kelamin'] ?>" readonly id="exampleFormControlInput1" placeholder="name@example.com">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Keluhan</label>
-                    <input type="text" class="form-control" name="keluhan" value="<?= $pasien['keluhan'] ?>" readonly id="exampleFormControlInput1" placeholder="name@example.com">
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Jenis Kelamin</label>
+                            <input type="text" class="form-control" name="jenis_kelamin" value="<?= $pasien['jenis_kelamin'] ?>" readonly id="exampleFormControlInput1" placeholder="name@example.com">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Keluhan</label>
+                            <input type="text" class="form-control" name="keluhan" value="<?= $pasien['keluhan'] ?>" readonly id="exampleFormControlInput1" placeholder="name@example.com">
+                        </div>
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Diagnosa</label>

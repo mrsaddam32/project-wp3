@@ -1,4 +1,5 @@
 <div class="container mt-5">
+    <?= $this->session->flashdata('pesan'); ?>
     <a href="<?= base_url('dokter/tambah_data'); ?>" class="btn btn-md btn-primary"><i class="bi bi-person-plus"></i> Tambah data dokter</a>
     <a href="<?= base_url('dashboard/cetak_pdf_dokter'); ?>" class="btn btn-danger"><i class="bi bi-file-earmark-pdf"></i> Cetak PDF</a>
     <div class="table-responsive">

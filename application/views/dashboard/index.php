@@ -12,6 +12,7 @@ $sembuh = $result[0]['sembuh'];
 $dirawat = $result[0]['dirawat'];
 ?>
 <div class="p-5 mb-4 bg-light rounded-3" style="height: 100vh;">
+    <?= $this->session->flashdata('pesan'); ?>
     <div class="container-fluid py-5">
         <h1 class="display-5 fw-bold">Welcome To Antaris Hospital</h1>
         <?php if (!empty($this->session->userdata('username'))) { ?>

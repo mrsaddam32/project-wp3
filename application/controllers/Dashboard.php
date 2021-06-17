@@ -130,4 +130,23 @@ class Dashboard extends CI_Controller
         $this->pdf->render();
         $this->pdf->stream("Laporan_data_dokter.pdf", ['Attachment' => 0]);
     }
+
+    public function cetak_pdf_obat()
+    {
+        $data = [
+            'user' => $this->UserModel->cekData(['username' => $this->session->userdata('username')])->row_array(),
+            'obat' => $this->ObatModel->getObat()->result(),
+            'title' => 'Laporan Data Obat'
+        ];
+        $this->load->view('dashboard/print_pdf_obat', $data);
+        // Config pdf
+        $paper_size = 'A4'; // Ukuran Kertas
+        $orientation = 'landscape'; // Format kertas
+        $html = $this->output->get_output();
+        $this->pdf->set_paper($paper_size, $orientation);
+        // Converting to PDF
+        $this->pdf->load_html($html);
+        $this->pdf->render();
+        $this->pdf->stream("Laporan_data_obat.pdf", ['Attachment' => 0]);
+    }
 }

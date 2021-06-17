@@ -50,6 +50,7 @@
         </div>
     </nav>
     <div class="container mt-5">
+        <?= $this->session->flashdata('pesan'); ?>
         <div class="row">
             <div class="col-md-4">
                 <div class="card">

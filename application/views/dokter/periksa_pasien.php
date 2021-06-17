@@ -33,8 +33,8 @@
         </div>
     </nav>
     <div class="container mt-5">
+        <?= $this->session->flashdata('pesan'); ?>
         <div class="table-responsive">
-            <?php $this->session->flashdata('pesan'); ?>
             <table class="table">
                 <thead>
                     <tr>

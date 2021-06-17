@@ -139,6 +139,10 @@ class Pasien extends CI_Controller
                 // var_dump($data);
                 // die;
                 $this->session->set_userdata($data);
+                $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                Selamat Datang ! <strong>' . $data['nama_pasien'] . '</strong>.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>');
                 redirect('pasien/myProfile');
             } else {
                 $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">No Pendaftaran / Tanggal Lahir salah</div>');
@@ -179,7 +183,10 @@ class Pasien extends CI_Controller
         $this->session->unset_userdata('nama_pasien');
         $this->session->unset_userdata('umur');
         $this->session->unset_userdata('jenis_kelamin');
-        $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-message" role="alert">Anda telah logout</div>');
+        $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+        Anda berhasil Logout.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>');
 
         redirect(base_url());
     }
