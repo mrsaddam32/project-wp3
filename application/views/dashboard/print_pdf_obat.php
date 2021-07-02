@@ -1,4 +1,5 @@
 <div class="container mt-5">
+    <h3>Laporan Data Obat</h3>
     <div class="table-responsive">
         <table class="table" width="100%" border="1">
             <thead>
