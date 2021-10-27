@@ -11,21 +11,18 @@ $meninggal = $result[0]['meninggal'];
 $sembuh = $result[0]['sembuh'];
 $dirawat = $result[0]['dirawat'];
 ?>
-<div class="p-5 mb-4 bg-light rounded-3" style="height: 100vh;">
+<div class="p-5 mb-4 rounded-3" style="height: 100vh;">
     <?= $this->session->flashdata('pesan'); ?>
     <div class="container-fluid py-5">
         <h1 class="display-5 fw-bold">Welcome To Antaris Hospital</h1>
-        <?php if (!empty($this->session->userdata('username'))) { ?>
-            <h3 class="fw-bold">Selamat datang, <?= $nama; ?></h3>
-        <?php } ?>
-        <p class="col-md-8 fs-4">Project ini dibuat oleh : </p>
-        <ul>
-            <li>10190055 Fachri Huseini</li>
-            <li>10190098 Luthfi Fadhlurrohman</li>
-            <li>10190130 Muhammad Saddam Pradana</li>
-            <li>10190076 Ryan Ikhsanul Akmal</li>
-            <li>10190065 Pramudya Widyanto</li>
-        </ul>
+        <div class="row d-flex">
+            <div class="col-md-8 justify-content-center">
+                <p><?php if (!empty($this->session->userdata('username'))) { ?>
+                <h3 class="fw-bold">Selamat datang, <?= $nama; ?></h3>
+            <?php } ?></p>
+            </div>
+            <div class="col-md-4"><img class="bounce" src="<?= base_url('') ?>assets/images/undraw_medicine_b1ol.svg" alt="" width="100%"></div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <h5 class="alert alert-info">
