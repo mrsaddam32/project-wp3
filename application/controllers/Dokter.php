@@ -34,9 +34,17 @@ class Dokter extends CI_Controller
 
     public function periksa_pasien()
     {
+        $dokter = $this->DokterModel->cekData(['kode_dokter' => $this->session->userdata('kode_dokter')])->row_array();
+        $spesialisDokter = $dokter['spesialis'];
+
+        // Ambil data pasien yang kategori pasiennya sama dengan spesialis dokter
+        $pasien = $this->PasienModel->cekData(['kategori' => $spesialisDokter])->result_array();
+
+
         $data = [
             'title' => 'Pemeriksaan Pasien',
-            'pasien' => $this->PasienModel->getPasien()->result()
+            'pasien' => $pasien,
+            'rekMedis' => $this->RekmedisModel->cekData(['no_pendaftaran' => $this->session->userdata('no_pendaftaran')])->row_array()
         ];
         // var_dump($data['pasien']);
         // die;
@@ -71,6 +79,17 @@ class Dokter extends CI_Controller
         $diagnosa = $this->input->post('diagnosa');
         $nama_obat = $this->input->post('nama_obat');
 
+        // Jika ada obat yang dipilih maka kurangi jumlah stok obat sesuai jumlah yang diberikan
+        if ($nama_obat != null) {
+            $jumlah_obat = $this->input->post('jumlah_obat');
+            $stok_obat = $this->ObatModel->getStokObat($nama_obat);
+            $stok_obat_baru = $stok_obat['stok'] - $jumlah_obat;
+            $data = [
+                'stok' => $stok_obat_baru
+            ];
+            $this->ObatModel->updateObat($data, $nama_obat);
+        }
+
         $data = [
             'id_pasien' => $id_pasien,
             'no_rmdk' => mt_rand(),
@@ -79,7 +98,8 @@ class Dokter extends CI_Controller
             'nama_dokter' => $nama_dokter,
             'keluhan' => $keluhan,
             'diagnosa' => $diagnosa,
-            'nama_obat' => $nama_obat
+            'nama_obat' => $nama_obat,
+            'jumlah_obat' => $jumlah_obat,
         ];
         // var_dump($data);
         // die;

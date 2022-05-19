@@ -66,6 +66,10 @@
                 <label for="floatingInput">Keluhan</label>
             </div>
             <div class="form-floating">
+                <input type="text" class="form-control mb-1" name="kategori" id="floatingInput" placeholder="">
+                <label for="floatingInput">Kategori</label>
+            </div>
+            <div class="form-floating">
                 <input type="text" class="form-control mb-1" name="jenis_kelamin" id="floatingInput" placeholder="">
                 <label for="floatingInput">Jenis Kelamin</label>
             </div>

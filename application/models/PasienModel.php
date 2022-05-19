@@ -20,11 +20,21 @@ class PasienModel extends CI_Model
             'nama_pasien' => $this->input->post('nama_pasien', true),
             'tgl_lahir' => $this->input->post('tgl_lahir', true),
             'keluhan' => $this->input->post('keluhan', true),
+            'kategori' => $this->input->post('kategori', true),
             'umur' => $this->input->post('umur', true),
             'jenis_kelamin' => $this->input->post('jenis_kelamin', true)
         ];
         $this->db->where('id_pasien', $this->input->post('id_pasien'));
         $this->db->update('pasien', $data);
+    }
+
+    public function getPasienByKategori($kategori)
+    {
+        $this->db->select('*');
+        $this->db->from('pasien');
+        $this->db->where('kategori', $kategori);
+        $query = $this->db->get();
+        return $query;
     }
 
     public function edit_data($where)

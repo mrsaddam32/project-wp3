@@ -26,6 +26,7 @@ class Pasien extends CI_Controller
                 'nama_pasien' => $pasien['nama_pasien'],
                 'tgl_lahir' => $pasien['tgl_lahir'],
                 'keluhan' => $pasien['keluhan'],
+                'kategori' => $pasien['kategori'],
                 'umur' => $pasien['umur'],
                 'jenis_kelamin' => $pasien['jenis_kelamin'],
                 'tgl_daftar' => $pasien['tgl_daftar']
@@ -88,6 +89,9 @@ class Pasien extends CI_Controller
         $this->form_validation->set_rules('keluhan', 'Keluhan', 'required', [
             'required' => 'Field keluhan belum diisi.'
         ]);
+        $this->form_validation->set_rules('kategori', 'Kategori', 'required', [
+            'required' => 'Field kategori belum diisi.'
+        ]);
         $this->form_validation->set_rules('jenis_kelamin', 'Jenis Kelamin', 'required', [
             'required' => 'Field jenis kelamin belum diisi.'
         ]);
@@ -101,6 +105,7 @@ class Pasien extends CI_Controller
                 'nama_pasien' => htmlspecialchars($this->input->post('nama')),
                 'tgl_lahir' => $this->input->post('tgl_lahir'),
                 'keluhan' => $this->input->post('keluhan'),
+                'kategori' => $this->input->post('kategori'),
                 'umur' => $this->input->post('umur'),
                 'jenis_kelamin' => $this->input->post('jenis_kelamin'),
             ];
@@ -159,6 +164,7 @@ class Pasien extends CI_Controller
         $data['title'] = 'Edit Data Pasien';
         $data['pasien'] = $this->PasienModel->getPasienById($id_pasien);
         $data['jenis_kelamin'] = ['Laki-Laki', 'Perempuan'];
+        $data['kategori'] = ['UMUM', 'THT', 'KULIT & KELAMIN'];
 
         $this->form_validation->set_rules('nama_pasien', 'Nama Pasien', 'required');
         $this->form_validation->set_rules('jenis_kelamin', 'Jenis Kelamin', 'required');

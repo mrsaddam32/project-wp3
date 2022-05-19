@@ -34,6 +34,7 @@
     </nav>
     <div class="container mt-5">
         <?= $this->session->flashdata('pesan'); ?>
+        <a href="<?= base_url() ?>dokter/myProfile" class="btn btn-md btn-primary">Back to profile</a>
         <div class="table-responsive">
             <table class="table">
                 <thead>
@@ -45,6 +46,7 @@
                         <th scope="col">Tanggal Lahir</th>
                         <th scope="col">Jenis kelamin</th>
                         <th scope="col">Keluhan</th>
+                        <th scope="col">Kategori</th>
                         <th scope="col">Tanggal Daftar</th>
                         <th scope="col">Aksi</th>
                     </tr>
@@ -54,15 +56,20 @@
                     <tbody>
                         <tr>
                             <th scope="row"><?= $i++; ?></th>
-                            <td><?= $row->no_pendaftaran; ?></td>
-                            <td><?= $row->nama_pasien; ?></td>
-                            <td><?= $row->umur; ?></td>
-                            <td><?= $row->tgl_lahir; ?></td>
-                            <td><?= $row->jenis_kelamin; ?></td>
-                            <td><?= $row->keluhan; ?></td>
-                            <td><?= $row->tgl_daftar; ?></td>
+                            <td><?= $row['no_pendaftaran']; ?></td>
+                            <td><?= $row['nama_pasien']; ?></td>
+                            <td><?= $row['umur']; ?></td>
+                            <td><?= $row['tgl_lahir']; ?></td>
+                            <td><?= $row['jenis_kelamin']; ?></td>
+                            <td><?= $row['keluhan']; ?></td>
+                            <td><?= $row['kategori']; ?></td>
+                            <td><?= $row['tgl_daftar']; ?></td>
                             <td>
-                                <a href="<?= base_url('dokter/rekam_medis/' . $row->id_pasien) ?>" class="btn btn-sm btn-success">Rekam Medis</a>
+                                <?php if (empty($rekMedis)) { ?>
+                                    <a href="<?= base_url('dokter/rekam_medis/' . $row['id_pasien']) ?>" class="btn btn-sm btn-success">Rekam Medis</a>
+                                <?php } else { ?>
+                                    <span class="badge bg-info">Sudah Diperiksa</span>
+                                <?php } ?>
                             </td>
                         </tr>
                     </tbody>

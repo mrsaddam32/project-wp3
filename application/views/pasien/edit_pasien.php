@@ -16,6 +16,18 @@
                 <input type="text" class="form-control" value="<?= $pasien['keluhan'] ?>" readonly name="keluhan" id="exampleFormControlInput1" placeholder="name@example.com">
             </div>
             <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Kategori</label>
+                <select class="form-select" aria-label="Default select example" name="jenis_kelamin">
+                    <?php foreach ($kategori as $k) : ?>
+                        <?php if ($k == $pasien['kategori']) : ?>
+                            <option value="<?= $k; ?>" selected><?= $k; ?></option>
+                        <?php else : ?>
+                            <option value="<?= $k; ?>"><?= $k; ?></option>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Umur</label>
                 <input type="numeric" class="form-control" value="<?= $pasien['umur'] ?>" readonly name="umur" id="exampleFormControlInput1" placeholder="name@example.com">
             </div>

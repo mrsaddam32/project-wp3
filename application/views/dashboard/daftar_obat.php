@@ -1,6 +1,6 @@
 <div class="container mt-5">
     <a href="<?= base_url('obat/tambah_data'); ?>" class="btn btn-md btn-primary">Tambah data obat</a>
-    <a href="<?= base_url('dashboard/cetak_pdf_obat'); ?>" class="btn btn-danger"><i class="bi bi-file-earmark-pdf"></i> Cetak PDF</a>
+    <a href="<?= base_url('dashboard/cetak_pdf_obat'); ?>" target="_blank" class="btn btn-danger"><i class="bi bi-file-earmark-pdf"></i> Cetak PDF</a>
     <div class="table-responsive">
         <table class="table">
             <thead>

@@ -91,6 +91,10 @@
                         <?php } ?>
                     </select>
                 </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Jumlah Obat</label>
+                    <input type="text" class="form-control" name="jumlah_obat" id="exampleFormControlInput1" placeholder="Masukkan jumlah obat..">
+                </div>
                 <button class="btn btn-primary" type="submit">Rekam Pasien</button>
             </form>
         </div>

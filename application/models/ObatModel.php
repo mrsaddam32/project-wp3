@@ -22,6 +22,15 @@ class ObatModel extends CI_Model
         return $this->db->get_where('obat', ['id_obat' => $id_obat])->row_array();
     }
 
+    public function getStokObat($nama_obat)
+    {
+        $this->db->select('stok');
+        $this->db->from('obat');
+        $this->db->where('nama_obat', $nama_obat);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
     public function updateObat()
     {
         $data = [
